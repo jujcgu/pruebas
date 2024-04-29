@@ -8,7 +8,7 @@ Created on Tue Nov 21 20:49:31 2023
 
 
 import json
-
+#path json
 model_filename = "/home/usco/Documents/pruebas/json-query-sql/pruebas.json"
 # Opening JSON file
 f = open(model_filename)
