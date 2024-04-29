@@ -1,0 +1,104 @@
+{
+	"app":"pruebas",
+	"db_engine":"postgres",
+	"db_host":"localhost",
+    "db_port":5432,
+	"engine_databasename":"postgres",
+	"dba_username":"postgres",
+	"dba_password":"software23",
+	"app_database_name":"pruebas8",
+	"app_database_owner":"pruebas",
+	"app_database_password":"pruebas8",
+	"roles":[
+    	{"username":"pruebas", "password":"pruebas"},
+    	{"username":"pruebas_admin", "password":"admin"},
+    	{"username":"pruebas_client", "password":"pruebas_client"},
+    	{"username":"pruebas_guest", "password":"pruebas_guest"}
+	],
+	
+	"classes":[
+    	{
+        	"name":"state",
+        	"attributes":[
+            	{
+                	"name":"id", 
+                	"data_type":"int",
+                	"length":0,
+                	"not_null":true,
+                	"pk":true,
+                	"fk":false,
+                	"autoincrement":true,
+                	"default":"",
+                	"description":""
+                },
+            	{
+                	"name":"name", 
+                	"data_type":"string",
+                	"length":100,
+                	"not_null":true,
+                	"pk":false,
+                	"fk":false,
+                	"autoincrement":false,
+                	"default":"",
+                	"description":""
+            	}
+        	],
+        	"relations":[
+        	],
+        	"grants":[
+            	{"pruebas_admin":["CREATE", "READ", "UPDATE", "DELETE"]},
+            	{"pruebas_client":["READ"]}
+        	]
+    	},
+    	{
+        	"name":"role",
+        	"attributes":[
+            	{
+                	"name":"id", 
+                	"data_type":"int",
+                	"length":0,
+                	"not_null":true,
+                	"pk":true,
+                	"fk":false,
+                	"autoincrement":true,
+                	"default":"",
+                	"description":""
+                },
+            	{
+                	"name":"name", 
+                	"data_type":"string",
+                	"length":100,
+                	"not_null":true,
+                	"pk":false,
+                	"fk":false,
+                	"autoincrement":false,
+                	"default":"",
+                	"description":""
+            	},
+            	{
+                	"name":"state", 
+                	"data_type":"int",
+                	"length":0,
+                	"not_null":true,
+                	"pk":false,
+                	"fk":true,
+                	"autoincrement":false,
+                	"default":"",
+                	"description":""
+            	}
+        	],
+        	"relations":[
+            	{
+                	"local_attribute":"state",
+                	"referenced_table":"state",
+                	"referenced_attribute":"id"
+                }
+        	],
+        	"grants":[
+            	{"admin":["CREATE", "READ", "UPDATE", "DELETE"]},
+            	{"user":["READ"]}
+        	]
+    	}
+	]
+	
+}
