@@ -5,10 +5,10 @@
     "db_port":5432,
 	"engine_databasename":"postgres",
 	"dba_username":"postgres",
-	"dba_password":"software23",
+	"dba_password":"ia2023",
 	"app_database_name":"pruebas8",
 	"app_database_owner":"pruebas",
-	"app_database_password":"pruebas8",
+	"app_database_password":"pruebas",
 	"roles":[
     	{"username":"pruebas", "password":"pruebas"},
     	{"username":"pruebas_admin", "password":"admin"},
@@ -95,8 +95,8 @@
                 }
         	],
         	"grants":[
-            	{"admin":["CREATE", "READ", "UPDATE", "DELETE"]},
-            	{"user":["READ"]}
+            	{"pruebas_admin":["CREATE", "READ", "UPDATE", "DELETE"]},
+            	{"pruebas_client":["READ"]}
         	]
     	}
 	]

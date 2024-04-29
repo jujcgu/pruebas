@@ -9,7 +9,7 @@ Created on Tue Nov 21 20:49:31 2023
 
 import json
 
-model_filename = "/home/server2/Documents/pruebas/json-query-sql/pruebas.json"
+model_filename = "/home/usco/Documents/pruebas/json-query-sql/pruebas.json"
 # Opening JSON file
 f = open(model_filename)
 # returns JSON object as 
@@ -56,26 +56,36 @@ conn.autocommit = True
 cursor = conn.cursor()
 
 
+sql_text = "DROP DATABASE IF EXISTS {};\n".format(app_database_name)
+sql_string = sql.SQL(sql_text)
+cursor.execute(sql_text)
+file1.write(sql_text)
+
+
+
+
+
 roles = data["roles"]    
     
 for role in roles:
     role_username = role["username"]
     role_password = role["password"]
     
+    try:
+        sql_text = "DROP ROLE IF EXISTS {};\n".format(role_username)
+        sql_string = sql.SQL(sql_text)
+        cursor.execute(sql_text)
+        # print(cursor.fetchone())
+        file1.write(sql_text)
+    except:
+        pass
     
-    sql_text = "DROP ROLE IF EXISTS {};\n".format(role_username)
     sql_text += "CREATE ROLE {} WITH LOGIN ENCRYPTED PASSWORD '{}';\n"
     sql_text = sql_text.format(role_username, role_password)
-    
     sql_string = sql.SQL(sql_text)
     cursor.execute(sql_text)
     # print(cursor.fetchone())
-    
     file1.write(sql_text)
-
-
-
-
 
 
 
@@ -86,7 +96,6 @@ sql_text = "DROP DATABASE IF EXISTS {};\n".format(app_database_name)
 sql_string = sql.SQL(sql_text)
 cursor.execute(sql_text)
 # print(cursor.fetchone())
-
 file1.write(sql_text)
 
 
@@ -118,12 +127,20 @@ db_postgres = {
     "int":"int",
     "string":"character varying"}
 
+crud_dict = {
+    "CREATE":"insert",
+    "READ":"select",
+    "UPDATE":"update",
+    "DELETE":"delete"
+    }
+
+
 classes = data["classes"]
 
 sql_text = ""
 for _class in classes:
     class_name = _class["name"]
-    attributes =_class["attributes"]
+    attributes = _class["attributes"]
     
     sql_text += "CREATE TABLE {} (\n"
     sql_text = sql_text.format(class_name)
@@ -149,8 +166,37 @@ for _class in classes:
     
     # sql_text = sql_text[:-2]
     # if attribute_pk == "true":
-    sql_text += " CONSTRAINT {}_pkey PRIMARY KEY ({})\n"
+    sql_text += " CONSTRAINT {}_pkey PRIMARY KEY ({})"
     sql_text = sql_text.format(class_name, "id")
+    
+    
+    print("-"*60)
+    relations = _class["relations"]
+    
+    if len(relations) > 0:
+        sql_text += ","   
+    
+    for relation in relations:
+        print(relation)
+        local_attribute = relation["local_attribute"]
+        referenced_table = relation["referenced_table"]
+        referenced_attribute = relation["referenced_attribute"]
+        
+        sql_text += "\n CONSTRAINT {}_{}_{}_fkey FOREIGN KEY ({})\n"
+        sql_text += " REFERENCES public.{} ({}) MATCH SIMPLE\n"
+        sql_text += " ON UPDATE NO ACTION\n"
+        sql_text += " ON DELETE NO ACTION\n"
+   
+        
+        sql_text = sql_text.format(
+            class_name,
+            referenced_table,
+            referenced_attribute,
+            referenced_attribute,
+            referenced_table,
+            referenced_attribute
+            )
+    	
     
     sql_text += ")\n"
     sql_text += "WITH (\n"
@@ -169,6 +215,23 @@ for _class in classes:
     print(sql_text)
     
     
+    print("-"*60)
+    grants = _class["grants"]
+    
+    for grant in grants:
+        username = list(grant.keys())[0]
+        grant_values = list(grant.values())[0]
+        
+        grant_list = ", ".join(crud_dict[x] for x in grant_values)
+            
+        sql_text += "\n grant {} on {} to {};\n"
+        
+        sql_text = sql_text.format(
+            grant_list,
+            class_name,
+            username
+            )
+        
     
 sql_string = sql.SQL(sql_text)
 
