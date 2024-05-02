@@ -10,7 +10,7 @@ Created on Tue Nov 21 20:49:31 2023
 import json
 
 # model_filename = "/home/usco/databases/pruebas.json"
-model_filename = "/home/usco/gitpruebas/pruebas/pruebas2/pruebas1.json"
+model_filename = "/home/usco/gitpruebass/gitpruebas/pruebas/pruebas2/pruebas1.json"
 # Opening JSON file
 f = open(model_filename)
 # returns JSON object as 
@@ -21,7 +21,6 @@ print(data)
 
 
 file1 = open("myfile.sql", "w")
-
 
 app = data["app"]
 db_engine = data["db_engine"]
@@ -184,6 +183,12 @@ for _class in classes:
         sql_text += "\tON UPDATE NO ACTION\n"
         sql_text += "\tON DELETE NO ACTION\n"
    
+    
+   
+        # sql_text += "CONSTRAINT {}_{}_fkey FOREIGN KEY ({})\n"
+        # sql_text += "REFERENCES public.{} ({}) MATCH SIMPLE\n"
+        # sql_text += "ON UPDATE NO ACTION\n"
+        # sql_text += "ON DELETE NO ACTION\n"
         
         # sql_text = sql_text.format(
         #     class_name,
@@ -195,8 +200,8 @@ for _class in classes:
         #     )
         sql_text = sql_text.format(
             class_name,
-            referenced_table,
-            referenced_attribute,
+            local_attribute,
+            local_attribute,
             referenced_table,
             referenced_attribute
             )

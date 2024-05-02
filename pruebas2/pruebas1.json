@@ -79,14 +79,13 @@
         }
       ],
       "relations": [],
-      "grants": {
-        "pruebas_admin": ["CREATE", "READ", "UPDATE", "DELETE"],
-        "pruebas_client": ["READ"],
-        "pruebas_guest": ["READ"]
-      }
+        	"grants":[
+            	{"pruebas_admin":["CREATE", "READ", "UPDATE", "DELETE"]},
+            	{"pruebas_client":["READ"]}
+        	]
     },
     {
-      "name": "Departamento",
+      "name": "departamento",
       "descripcion": "Almacena los departamentos",
       "attributes": [
         {
@@ -167,14 +166,13 @@
           "referenced_attribute": "id"
         }
       ],
-      "grants": {
-        "pruebas_admin": ["CREATE", "READ", "UPDATE", "DELETE"],
-        "pruebas_client": ["READ"],
-        "pruebas_guest": ["READ"]
-      }
+        	"grants":[
+            	{"pruebas_admin":["CREATE", "READ", "UPDATE", "DELETE"]},
+            	{"pruebas_client":["READ"]}
+        	]
     },
     {
-      "name": "Municipio",
+      "name": "municipio",
       "descripcion": "Almacena los municipios",
       "attributes": [
         {
@@ -255,11 +253,10 @@
           "referenced_attribute": "id"
         }
       ],
-      "grants": {
-        "pruebas_admin": ["CREATE", "READ", "UPDATE", "DELETE"],
-        "pruebas_client": ["READ"],
-        "pruebas_guest": ["READ"]
-      }
+        	"grants":[
+            	{"pruebas_admin":["CREATE", "READ", "UPDATE", "DELETE"]},
+            	{"pruebas_client":["READ"]}
+        	]
     },
     {
       "name": "tipoentidad",
@@ -315,11 +312,10 @@
           "referenced_attribute": "id"
         }
       ],
-      "grants": {
-        "pruebas_admin": ["CREATE", "READ", "UPDATE", "DELETE"],
-        "pruebas_client": ["READ"],
-        "pruebas_guest": ["READ"]
-      }
+        	"grants":[
+            	{"pruebas_admin":["CREATE", "READ", "UPDATE", "DELETE"]},
+            	{"pruebas_client":["READ"]}
+        	]
     },
     {
       "name": "entidad",
@@ -382,7 +378,7 @@
           "encryted": false
         },
         {
-          "name": "tipo_entidad",
+          "name": "tipoentidad",
           "data_type": "int",
           "length": 0,
           "pk": false,
@@ -445,21 +441,20 @@
           "referenced_attribute": "id"
         },
         {
-          "local_attribute": "tipo_entidad",
-          "referenced_table": "tipo_entidad",
+          "local_attribute": "tipoentidad",
+          "referenced_table": "tipoentidad",
           "referenced_attribute": "id"
-        },        
-        {
-          "local_attribute": "tipo_entidad",
-          "referenced_table": "tipo_entidad",
-          "referenced_attribute": "id"
-        }
+        },
+                {
+                  "local_attribute": "estado",
+                  "referenced_table": "estado",
+                  "referenced_attribute": "id"
+                }
       ],
-      "grants": {
-        "pruebas_admin": ["CREATE", "READ", "UPDATE", "DELETE"],
-        "pruebas_client": ["READ"],
-        "pruebas_guest": ["READ"]
-      }
+        	"grants":[
+            	{"pruebas_admin":["CREATE", "READ", "UPDATE", "DELETE"]},
+            	{"pruebas_client":["READ"]}
+        	]
     },
     {
       "name": "perfil",
@@ -543,11 +538,10 @@
           "referenced_attribute": "id"
         }
       ],
-      "grants": {
-        "pruebas_admin": ["CREATE", "READ", "UPDATE", "DELETE"],
-        "pruebas_client": ["READ"],
-        "pruebas_guest": ["READ"]
-      }
+        	"grants":[
+            	{"pruebas_admin":["CREATE", "READ", "UPDATE", "DELETE"]},
+            	{"pruebas_client":["READ"]}
+        	]
     },
     {
       "name": "tipo_identificacion",
@@ -583,11 +577,10 @@
         }
       ],
       "relations": [],
-      "grants": {
-        "pruebas_admin": ["CREATE", "READ", "UPDATE", "DELETE"],
-        "pruebas_client": ["READ"],
-        "pruebas_guest": ["READ"]
-      }
+        	"grants":[
+            	{"pruebas_admin":["CREATE", "READ", "UPDATE", "DELETE"]},
+            	{"pruebas_client":["READ"]}
+        	]
     },
     {
       "name": "persona",
@@ -760,11 +753,10 @@
           "referenced_attribute": "id"
         }
       ],
-      "grants": {
-        "pruebas_admin": ["CREATE", "READ", "UPDATE", "DELETE"],
-        "pruebas_client": ["READ"],
-        "pruebas_guest": ["READ"]
-      }
+        	"grants":[
+            	{"pruebas_admin":["CREATE", "READ", "UPDATE", "DELETE"]},
+            	{"pruebas_client":["READ"]}
+        	]
     },
     {
       "name": "usuario",
@@ -839,11 +831,10 @@
           "referenced_attribute": "id"
         }
       ],
-      "grants": {
-        "pruebas_admin": ["CREATE", "READ", "UPDATE", "DELETE"],
-        "pruebas_client": ["READ"],
-        "pruebas_guest": ["READ"]
-      }
+        	"grants":[
+            	{"pruebas_admin":["CREATE", "READ", "UPDATE", "DELETE"]},
+            	{"pruebas_client":["READ"]}
+        	]
     },
     {
       "name": "usuario_perfil",
@@ -923,11 +914,10 @@
           "referenced_attribute": "id"
         }
       ],
-      "grants": {
-        "pruebas_admin": ["CREATE", "READ", "UPDATE", "DELETE"],
-        "pruebas_client": ["READ"],
-        "pruebas_guest": ["READ"]
-      }
+        	"grants":[
+            	{"pruebas_admin":["CREATE", "READ", "UPDATE", "DELETE"]},
+            	{"pruebas_client":["READ"]}
+        	]
     },
     {
       "name": "estado",
@@ -977,11 +967,10 @@
         }
       ],
       "relations": [],
-      "grants": {
-        "pruebas_admin": ["CREATE", "READ", "UPDATE", "DELETE"],
-        "pruebas_client": ["READ"],
-        "pruebas_guest": ["READ"]
-      }
+        	"grants":[
+            	{"pruebas_admin":["CREATE", "READ", "UPDATE", "DELETE"]},
+            	{"pruebas_client":["READ"]}
+        	]
     },
     {
       "name": "sesion",
@@ -1065,11 +1054,10 @@
           "referenced_attribute": "id"
         }
       ],
-      "grants": {
-        "pruebas_admin": ["CREATE", "READ", "UPDATE", "DELETE"],
-        "pruebas_client": ["READ"],
-        "pruebas_guest": ["READ"]
-      }
+        	"grants":[
+            	{"pruebas_admin":["CREATE", "READ", "UPDATE", "DELETE"]},
+            	{"pruebas_client":["READ"]}
+        	]
     },
     {
       "name": "modulo",
@@ -1153,11 +1141,10 @@
           "referenced_attribute": "id"
         }
       ],
-      "grants": {
-        "pruebas_admin": ["CREATE", "READ", "UPDATE", "DELETE"],
-        "pruebas_client": ["READ"],
-        "pruebas_guest": ["READ"]
-      }
+        	"grants":[
+            	{"pruebas_admin":["CREATE", "READ", "UPDATE", "DELETE"]},
+            	{"pruebas_client":["READ"]}
+        	]
     },
     {
       "name": "tipo_permiso",
@@ -1193,11 +1180,10 @@
         }
       ],
       "relations": [],
-      "grants": {
-        "pruebas_admin": ["CREATE", "READ", "UPDATE", "DELETE"],
-        "pruebas_client": ["READ"],
-        "pruebas_guest": ["READ"]
-      }
+        	"grants":[
+            	{"pruebas_admin":["CREATE", "READ", "UPDATE", "DELETE"]},
+            	{"pruebas_client":["READ"]}
+        	]
     },
     {
       "name": "permisos",
@@ -1277,11 +1263,10 @@
           "referenced_attribute": "id"
         }
       ],
-      "grants": {
-        "pruebas_admin": ["CREATE", "READ", "UPDATE", "DELETE"],
-        "pruebas_client": ["READ"],
-        "pruebas_guest": ["READ"]
-      }
+        	"grants":[
+            	{"pruebas_admin":["CREATE", "READ", "UPDATE", "DELETE"]},
+            	{"pruebas_client":["READ"]}
+        	]
     },
     {
       "name": "panelcontrol",
@@ -1351,11 +1336,10 @@
           "referenced_attribute": "id"
         }
       ],
-      "grants": {
-        "pruebas_admin": ["CREATE", "READ", "UPDATE", "DELETE"],
-        "pruebas_client": ["READ"],
-        "pruebas_guest": ["READ"]
-      }
+        	"grants":[
+            	{"pruebas_admin":["CREATE", "READ", "UPDATE", "DELETE"]},
+            	{"pruebas_client":["READ"]}
+        	]
     },
     {
       "name": "panelcontrol_menu",
@@ -1391,11 +1375,10 @@
         }
       ],
       "relations": [],
-      "grants": {
-        "pruebas_admin": ["CREATE", "READ", "UPDATE", "DELETE"],
-        "pruebas_client": ["READ"],
-        "pruebas_guest": ["READ"]
-      }
+        	"grants":[
+            	{"pruebas_admin":["CREATE", "READ", "UPDATE", "DELETE"]},
+            	{"pruebas_client":["READ"]}
+        	]
     }
   ]
 }
