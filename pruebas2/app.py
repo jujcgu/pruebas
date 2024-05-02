@@ -10,7 +10,7 @@ Created on Tue Nov 21 20:49:31 2023
 import json
 
 # model_filename = "/home/usco/databases/pruebas.json"
-model_filename = "/home/usco/databases/pruebas1.json"
+model_filename = "/home/usco/gitpruebas/pruebas/pruebas2/pruebas1.json"
 # Opening JSON file
 f = open(model_filename)
 # returns JSON object as 
@@ -174,21 +174,33 @@ for _class in classes:
         referenced_table = relation["referenced_table"]
         referenced_attribute = relation["referenced_attribute"]
         
-        sql_text += "CONSTRAINT {}{}{}_fkey FOREIGN KEY ({})\n"
+        # sql_text += "CONSTRAINT {}_{}{}_fkey FOREIGN KEY ({})\n"
+        # sql_text += "\tREFERENCES public.{} ({}) MATCH SIMPLE\n"
+        # sql_text += "\tON UPDATE NO ACTION\n"
+        # sql_text += "\tON DELETE NO ACTION\n"
+        
+        sql_text += "CONSTRAINT {}_{}_fkey FOREIGN KEY ({})\n"
         sql_text += "\tREFERENCES public.{} ({}) MATCH SIMPLE\n"
         sql_text += "\tON UPDATE NO ACTION\n"
         sql_text += "\tON DELETE NO ACTION\n"
    
         
+        # sql_text = sql_text.format(
+        #     class_name,
+        #     referenced_table,
+        #     referenced_attribute,
+        #     referenced_attribute,
+        #     referenced_table,
+        #     referenced_attribute
+        #     )
         sql_text = sql_text.format(
             class_name,
             referenced_table,
             referenced_attribute,
-            referenced_attribute,
             referenced_table,
             referenced_attribute
             )
-    	
+        
     
     sql_text += ")\n"
     sql_text += "WITH (\n"
@@ -210,66 +222,34 @@ for _class in classes:
     print("-"*60)
     grants = _class["grants"]
     
-    
-    
-    
-
-    for username, permissions in grants.items():
-        grant_list = ", ".join(crud_dict[perm] for perm in permissions)
-        sql_text += "GRANT {} ON TABLE {} TO {};\n".format(grant_list, class_name, username)
         
         
         
+    for grant in grants:
+        username = list(grant.keys())[0]
+        grant_values = list(grant.values())[0]
         
-        
-    # for grant in grants:
-    #     username = list(grant.keys())[0]
-    #     grant_values = list(grant.values())[0]
-        
-    #     grant_list = ", ".join(crud_dict[x] for x in grant_values)
+        grant_list = ", ".join(crud_dict[x] for x in grant_values)
             
-    #     sql_text += "GRANT {} ON {} TO {};\n"
+        sql_text += "GRANT {} ON {} TO {};\n"
         
-    #     sql_text = sql_text.format(
-    #         grant_list,
-    #         class_name,
-    #         username
-            # )
-        # 
+        sql_text = sql_text.format(
+            grant_list,
+            class_name,
+            username
+            )
+        
     
-sql_string = sql.SQL(sql_text)
 
-
-
-app = data["app"]
-db_engine = data["db_engine"]
-db_host = data["db_host"]
-db_port = data["db_port"]
-engine_databasename = data["engine_databasename"]
-dba_username = data["dba_username"]
-dba_password = data["dba_password"]
-app_database_name = data["app_database_name"]
-app_database_owner = data["app_database_owner"]
-app_database_password = data["app_database_password"]
-
-conn = psycopg2.connect(
-    database=app_database_name,
-    host=db_host,
-    user=app_database_owner,
-    password=app_database_password,
-    port=db_port)
-
-conn.autocommit = True
-
-cursor = conn.cursor()
-
-cursor.execute(sql_text)
-    
 
 # L = ["This is Delhi \n", "This is Paris \n", "This is London \n"]
  
 # \n is placed to indicate EOL (End of Line)
 file1.write(sql_text)
+
+
+
+
 
 
 # file1.writelines(L)
@@ -284,10 +264,3 @@ file1.close()  # to change file access modes
 f.close()
 
 
-
-
-
-
-# for grant_username, grant_permissions in grants.items():
-#     grant_list = ", ".join(crud_dict[permission] for permission in grant_permissions)
-#     sql_text += "GRANT {} ON {} TO {};\n".format(grant_list, class_name, grant_username)

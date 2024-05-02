@@ -10,7 +10,8 @@ import os
 import json
 
 
-base_path = "/home/usco/Documents/test/pruebas/pruebas"
+# base_path = "/home/usco/Documents/test/pruebas/pruebas"
+base_path = "/home/usco/gitpruebas/pruebas/pruebas"
 package_name = "org.usco.test"
 
 
@@ -23,7 +24,9 @@ data_dict = {
     }
 
 
-model_filename = "/home/usco/Documents/test/pruebas/pruebas2/pruebas1.json"
+# model_filename = "/home/usco/Documents/test/pruebas/pruebas2/pruebas1.json"
+# model_filename = "/home/usco/gitpruebas/pruebas/pruebas2/pruebas1.json"
+model_filename = "/home/usco/gitpruebas/pruebas/pruebas2/pruebas.json"
 f = open(model_filename)
 data = json.load(f)
  
@@ -53,7 +56,8 @@ for _class in classes:
 
 
 
-    f = open("/home/usco/Documents/test/pruebas/pruebas/templates/Model.java", "r")
+    # f = open("/home/usco/Documents/test/pruebas/pruebas/templates/Model.java", "r")
+    f = open("/home/usco/gitpruebas/pruebas/pruebas/templates/Model.java", "r")
     content = f.read()
 
     class_name = class_name[0].upper() + class_name[1:]
@@ -211,24 +215,37 @@ for _class in classes:
     # $TO_STRING$
     
 
-    to_string = ""
-    indentation = ""
-    for attribute in attributes:
-        attribute_name = attribute["name"]    
-        to_string = "{} " + "[" + "{}= " + {} + "]".format(class_name,attribute_name,attribute_name)   
+    # to_string = ""
+    # indentation = ""
+    # for attribute in attributes:
+    #     attribute_name = attribute["name"]    
+    #     to_string += "{} " + "[" + "{}= " + {} + "]".format(class_name,attribute_name,attribute_name)   
         
         
         
-        # return "$CLASS_NAME$ [id=" + id + ", pais=" + pais + ", nombre=" + nombre + ", acronimo=" + acronimo + "]";
+    #     # return "$CLASS_NAME$ [id=" + id + ", pais=" + pais + ", nombre=" + nombre + ", acronimo=" + acronimo + "]";
         
 
             
-        # indentation = ", "
-    content = content.replace("$TO_STRING$", to_string)
+    #     indentation = ", "
+    # content = content.replace("$TO_STRING$", to_string)
     
     
 
 	
+    # $TO_STRING$
+
+    to_string = "\n\t@Override\n\tpublic String toString() {\n\t\treturn \"" + class_name + " ["
+    for attribute in attributes:
+        attribute_name = attribute["name"]
+        to_string += attribute_name + "=\" + " + attribute_name + " + \", "
+
+    to_string = to_string.rstrip(", ") 
+    to_string += "]\";\n\t}"
+    
+    # Incorporar el método toString en el contenido general de la clase
+    content = content.replace("$TO_STRING$", to_string)
+        
     
     
     

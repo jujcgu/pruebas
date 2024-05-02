@@ -58,8 +58,5 @@ public class Estado {
 		return "Estado [id=" + id + ", pais=" + pais + ", nombre=" + nombre + ", acronimo=" + acronimo + "]";
 	}
 	
-	
-	
-	
 
 }
